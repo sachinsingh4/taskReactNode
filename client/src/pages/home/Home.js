@@ -1,21 +1,14 @@
 import React, { useState } from "react";
 import "./home.css";
 import axios from "axios";
+import { getStudent } from "../../services/index";
 export default function Home() {
   const [copyStudentList, setcopyStudentList] = useState([]);
   const handleSubmit = async () => {
     try {
-      const response = await axios(
-        "http://localhost:5000/api/student/getdata",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "asfdasgfagdgafgfg",
-          },
-        }
-      );
-      setcopyStudentList(response.data);
+      getStudent().then((data) => {
+        setcopyStudentList(data);
+      });
     } catch (error) {
       console.error("Error:", error);
     }
@@ -34,7 +27,7 @@ export default function Home() {
         {copyStudentList.map((val, index) => {
           return (
             <tr key={val.id}>
-              <td className="hello">{val.id}</td>
+              <td className="hello">{index + 1}</td>
               <td className="hello">{val.name}</td>
               <td className="hello">{val.email}</td>
               <td className="hello">{val.address}</td>

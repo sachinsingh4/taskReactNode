@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { postStudent } from "../../services/index";
 export default function Register() {
   const [value, setValue] = useState([]);
   const navigate = useNavigate();
@@ -15,17 +16,7 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios(
-        "http://localhost:5000/api/student/postdata",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "asfdasgfagdgafgfg",
-          },
-          data: value,
-        }
-      );
+      postStudent(value);
       navigate("/");
     } catch (error) {
       console.error("Error:", error);
@@ -41,7 +32,7 @@ export default function Register() {
               <Card.Body>
                 <div className="mb-3 mt-md-4">
                   <h2 className="fw-bold mb-2 text-center text-uppercase ">
-                    Logo
+                    Register Student
                   </h2>
                   <div className="mb-3">
                     <Form onSubmit={handleSubmit}>
