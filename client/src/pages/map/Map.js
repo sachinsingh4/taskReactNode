@@ -57,7 +57,7 @@ const Map = () => {
       </GoogleMap>
 
       <div>Marker's Address: {address}</div>
-    </LoadScript>
+    </LoadScript> 
   );
 };
 
